@@ -172,6 +172,8 @@ class Manager{
 
         $sql->execute();
 
+        
+
 
     }
 
@@ -191,7 +193,15 @@ class Manager{
        // we return all the vehicles where the builder is "renault"
         
 
-        return $fetch ;
+       $vehicleBuilder = [];
+
+       foreach($fetch as $key){
+           $vehicle = new Vehicle;
+           $vehicle->hydrate($key);
+           $vehicleBuilder[]= $vehicle;
+       }
+
+       return $vehicleBuilder;
 
     }
 
@@ -206,7 +216,15 @@ class Manager{
         $sql->execute();
         $fetch = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-        return $fetch ;
+        $vehicleCt = [];
+
+        foreach($fetch as $key){
+            $vehicle = new Vehicle;
+            $vehicle->hydrate($key);
+            $vehicleCt[]= $vehicle;
+        }
+
+        return $vehicleCt;
 
     }
 
@@ -224,10 +242,16 @@ class Manager{
         $sql->execute();
         $fetch = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-        // we return all the vehicles where the fuel is "essence"
+        $vehicleFuel=[];
 
-        return $fetch ;
+        foreach($fetch as $key){
 
+            $vehicle = new Vehicle;
+            $vehicle->hydrate($key);
+            $vehicleFuel[] = $vehicle;
+        }
+
+            return $vehicleFuel;
     }
 
     /**
@@ -240,13 +264,23 @@ class Manager{
     public function listOfVehiclesByMoreKm(int $kilometer = 0){
 
        
-        $sql =$this->db->prepare("SELECT * FROM vehicles WHERE km >= '$kilometer'");
+        $sql =$this->db->prepare("SELECT * FROM vehicles WHERE km <= $kilometer");
         $sql->execute();
         $fetch = $sql->fetchAll(PDO::FETCH_ASSOC);
+        $listOfVehicles= [];
+  
+        foreach($fetch as $key){
 
+            $vehiclesKm = new Vehicle;
+            $vehiclesKm->hydrate($key);
+            $listOfVehicles[]= $vehiclesKm;
+            
+            
+        }
 
-        return $fetch ;
+        return $listOfVehicles;
 
+    
 
     }
        

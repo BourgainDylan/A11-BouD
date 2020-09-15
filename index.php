@@ -191,7 +191,7 @@ $manager = new Manager($db);
                 foreach($listOfVehicles as $vehicle){
                     echo '
                         <p '.$center.'>'.
-                       ''.$vehicle['modele'].' ('.$vehicle['immatriculation'].')
+                       ''.$vehicle->getBuilder().' ('.$vehicle->getImmatriculation().')
                         </p>
                     ';
                 }
@@ -205,7 +205,7 @@ $manager = new Manager($db);
                 foreach($listOfInvalidVehicles as $vehicle){
                     echo '
                         <p '.$center.'>'.
-                        $vehicle['constructeur'].' '.$vehicle['modele'].' ('.$vehicle['immatriculation'].')
+                        $vehicle->getBuilder().' '.$vehicle->getModel().' ('.$vehicle->getImmatriculation().')
                         </p>
                     ';
                 }
@@ -219,7 +219,7 @@ $manager = new Manager($db);
                 foreach($listOfGasolineVehicles as $vehicle){
                     echo '
                         <p '.$center.'>'.
-                        $vehicle['constructeur'].' '.$vehicle['modele'].' ('.$vehicle['km'].')
+                        $vehicle->getBuilder().''.$vehicle->getModel().'('.$vehicle->getKilometer().')
                         </p>
                     ';
                 }
@@ -234,7 +234,7 @@ $manager = new Manager($db);
                 foreach($listOfVehiclesByMoreKm as $vehicle){
                     echo '
                     //         <p '.$center.'>'.
-                                $vehicle['constructeur'].' '.$vehicle['modele'].' ('.$vehicle['immatriculation'].') '.$vehicle['km'].' km
+                                $vehicle->getBuilder(). $vehicle->getModel(). '('.$vehicle->getImmatriculation().') '.$vehicle->getKilometer().' km
                             </p>
                         ';
                 }
